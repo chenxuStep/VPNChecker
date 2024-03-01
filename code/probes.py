@@ -228,14 +228,11 @@ class application_layer_probes():
         sock = None
         try:            
             sock = socket.create_connection((ip, port))
-
-            # 创建一个HTTP GET请求
+        
             request = "GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format(ip)
             
-            # 发送HTTP请求
             sock.send(request.encode())
 
-            # 接收响应
             response = sock.recv(1024)            
             if "HTTP/1.1" in response.decode():            
                 toolFunction.csvWrite([ip,port,'success'],self.filePath+'/http.csv')
